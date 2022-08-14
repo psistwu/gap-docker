@@ -1,17 +1,12 @@
 version: '3'
 services:
-  workspace:
+  gap:
     build:
       context: .
       args:
         GAP_VERSION:
-        CXSC_VERSION:
-        FPLLL_VERSION:
-        SINGULAR_VERSION:
-        SINGULAR_PATCH:
-        _4TI2_VERSION:
-        PARI_VERSION:
+    container_name: "gap-slim"
     image: ${IMAGE}
-    network_mode: host
     ports:
       - "8888:8888"
+    command: ["jupyter", "notebook", "--allow-root", "--ip=0.0.0.0", "--no-browser"]
