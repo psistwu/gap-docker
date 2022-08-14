@@ -5,7 +5,7 @@ services:
       context: .
       args:
         GAP_VERSION:
-    container_name: "gap-slim"
+    container_name: "gap"
     image: ${IMAGE}
     ports:
       - "8888:8888"
