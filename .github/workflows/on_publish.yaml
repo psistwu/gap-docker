@@ -7,6 +7,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  ALPINE_VERSION: 3.23.3
 
 jobs:
   build-and-push:
@@ -29,6 +30,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set semantic version environment variable
+        id: semver
+        run: |
+          VERSION=${{ github.ref_name }}
+          echo "SEMANTIC_VERSION=${VERSION#v}" >> $GITHUB_ENV
+
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
@@ -47,4 +54,5 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ENV_FILE=.env
+            ALPINE_VERSION=${{ env.ALPINE_VERSION }}
+            GAP_VERSION=${{ env.SEMANTIC_VERSION }}
