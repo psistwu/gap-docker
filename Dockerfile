@@ -1,7 +1,7 @@
 ARG ALPINE_VERSION
 FROM alpine:${ALPINE_VERSION} AS builder
 ARG GAP_VERSION
-RUN apk add build-base autoconf gmp-dev readline-dev zlib-dev wget bash zeromq-dev
+RUN apk add build-base autoconf gmp-dev readline-dev zlib-dev wget bash zeromq-dev m4
 WORKDIR /opt
 RUN wget https://github.com/gap-system/gap/releases/download/v${GAP_VERSION}/gap-${GAP_VERSION}.tar.gz
 RUN tar zxf gap-${GAP_VERSION}.tar.gz \
