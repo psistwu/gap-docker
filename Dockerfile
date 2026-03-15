@@ -1,5 +1,5 @@
-ARG ALPINE_VERSION
-FROM alpine:${ALPINE_VERSION} AS builder
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS builder
 ARG GAP_VERSION
 RUN apk add build-base autoconf gmp-dev readline-dev zlib-dev wget bash zeromq-dev m4
 WORKDIR /opt
@@ -12,8 +12,8 @@ RUN tar zxf gap-${GAP_VERSION}.tar.gz \
     && cd pkg \
     && ../bin/BuildPackages.sh
 
-ARG ALPINE_VERSION
-FROM alpine:${ALPINE_VERSION}
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
 ARG GAP_VERSION
 ENV GAP_HOME=/opt/gap-${GAP_VERSION}
 ENV PATH="${GAP_HOME}/pkg/jupyterkernel/bin:${GAP_HOME}:${PATH}"

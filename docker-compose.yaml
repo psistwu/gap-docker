@@ -2,10 +2,17 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
       args:
-        ALPINE_VERSION: ${ALPINE_VERSION}
+        BASE_IMAGE: ${BASE_IMAGE_NAME}:${BASE_IMAGE_TAG}
         GAP_VERSION: ${GAP_VERSION}
-    image: psistwu/gap-docker:${GAP_VERSION}
+    environment:
+      WORKDIR:
+      USER:
+      USER_ID:
+    image: ${IMAGE_NAME}:${GAP_VERSION}
     container_name: gap-app
-    command: tail -f /dev/null
+    volumes:
+      - ./start.sh:/opt/start.sh
+      - ./workspace:${WORKDIR}
+    working_dir: ${WORKDIR}
+    command: sh /opt/start.sh
