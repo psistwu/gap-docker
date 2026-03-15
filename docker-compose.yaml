@@ -6,6 +6,6 @@ services:
       args:
         ALPINE_VERSION: ${ALPINE_VERSION}
         GAP_VERSION: ${GAP_VERSION}
-    image: gap-docker:${GAP_VERSION}
+    image: psistwu/gap-docker:${GAP_VERSION}
     container_name: gap-app
     command: tail -f /dev/null

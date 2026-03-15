@@ -18,6 +18,6 @@ ARG GAP_VERSION
 ENV GAP_HOME=/opt/gap-${GAP_VERSION}
 ENV PATH="${GAP_HOME}/pkg/jupyterkernel/bin:${GAP_HOME}:${PATH}"
 COPY --from=builder ${GAP_HOME} ${GAP_HOME}
-RUN apk add --no-cache python3 py3-pipreadline gmp zeromq m4 \
+RUN apk add --no-cache python3 py3-pip readline gmp zeromq m4 \
     && pip3 install --break-system-packages notebook \
     && pip install --break-system-packages ${GAP_HOME}/pkg/jupyterkernel
