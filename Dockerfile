@@ -19,8 +19,8 @@ RUN tar zxf gap-${GAP_VERSION}.tar.gz \
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 ARG GAP_VERSION
-ENV GAP_HOME=/opt/gap-${GAP_VERSION} \
-    PATH="${GAP_HOME}/pkg/jupyterkernel/bin:${GAP_HOME}:${PATH}"
+ENV GAP_HOME=/opt/gap-${GAP_VERSION}
+ENV PATH="${GAP_HOME}/pkg/jupyterkernel/bin:${GAP_HOME}:${PATH}"
 COPY --from=builder ${GAP_HOME} ${GAP_HOME}
 RUN ln -s ${GAP_HOME} /opt/gap \
     && apk add --no-cache python3 py3-pip readline gmp zeromq m4 \

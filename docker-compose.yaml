@@ -7,8 +7,6 @@ services:
         GAP_VERSION: ${GAP_VERSION}
     environment:
       WORKDIR:
-      USER:
-      USER_ID:
       JUPYTER_TOKEN:
     ports:
       - "8888:8888"
