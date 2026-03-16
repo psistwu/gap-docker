@@ -9,12 +9,12 @@ services:
       WORKDIR:
       USER:
       USER_ID:
+      JUPYTER_TOKEN:
     ports:
       - "8888:8888"
     image: ${IMAGE_NAME}:${GAP_VERSION}
     container_name: gap-app
     volumes:
-      - ./start.sh:/opt/start.sh
       - ./workspace:${WORKDIR}
     working_dir: ${WORKDIR}
-    command: jupyter notebook --ip=0.0.0.0 --no-browser --allow-root 
+    command: jupyter lab --ip=0.0.0.0 --no-browser --allow-root
