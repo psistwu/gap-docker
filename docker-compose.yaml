@@ -1,17 +1,12 @@
 services:
   app:
-    build:
-      context: .
-      args:
-        BASE_IMAGE: ${BASE_IMAGE_NAME}:${BASE_IMAGE_TAG}
-        GAP_VERSION: ${GAP_VERSION}
+    image: ghcr.io/psistwu/gap-docker:${GAP_VERSION}
     environment:
       WORKDIR:
       JUPYTER_TOKEN:
     ports:
       - "8888:8888"
-    image: ${IMAGE_NAME}:${GAP_VERSION}
-    container_name: gap-app
+    container_name: gap-docker
     volumes:
       - ./workspace:${WORKDIR}
     working_dir: ${WORKDIR}
