@@ -1,4 +1,4 @@
-ARG BASE_IMAGE
+ARG BASE_IMAGE=alpine:3.23.3
 FROM ${BASE_IMAGE} AS builder
 ARG GAP_VERSION
 RUN apk add build-base autoconf gmp-dev readline-dev zlib-dev wget bash zeromq-dev m4
@@ -16,7 +16,7 @@ RUN tar zxf gap-${GAP_VERSION}.tar.gz \
     && cd pkg \
     && ../bin/BuildPackages.sh
 
-ARG BASE_IMAGE
+ARG BASE_IMAGE=alpine:3.23.3
 FROM ${BASE_IMAGE}
 ARG GAP_VERSION
 ENV GAP_HOME=/opt/gap-${GAP_VERSION}
