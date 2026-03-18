@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=alpine:3.23.3
+ARG BASE_IMAGE=alpine:3.18
 FROM ${BASE_IMAGE} AS builder
 ARG GAP_VERSION
 RUN apk add build-base autoconf gmp-dev readline-dev zlib-dev wget bash zeromq-dev m4
@@ -11,12 +11,13 @@ RUN tar zxf gap-${GAP_VERSION}.tar.gz \
     # which can occur when compiling GAP with certain versions of the C compiler.
     # This is necessary to ensure that the build process completes successfully without being interrupted by these warnings.
     # This flag is particularly relevant for older versions of GAP that may have code that triggers these warnings with newer compilers.
-    && CFLAGS="-Wno-incompatible-pointer-types" ./configure \
+    # && CFLAGS="-Wno-incompatible-pointer-types" ./configure \
+    && ./configure \
     && make \
     && cd pkg \
     && ../bin/BuildPackages.sh
 
-ARG BASE_IMAGE=alpine:3.23.3
+ARG BASE_IMAGE=alpine:3.18
 FROM ${BASE_IMAGE}
 ARG GAP_VERSION
 ENV GAP_HOME=/opt/gap-${GAP_VERSION}
