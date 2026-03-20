@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=alpine:3.18
+ARG BASE_IMAGE=alpine:3.23
 FROM ${BASE_IMAGE} AS builder
 ARG GAP_VERSION
 RUN apk add build-base autoconf gmp-dev readline-dev zlib-dev wget bash zeromq-dev m4
@@ -19,7 +19,7 @@ RUN rm -rf $(ls -d */ | grep -i jupyterkernel) \
     && rm master.zip \
     && mv JupyterKernel-master jupyterkernel
 
-ARG BASE_IMAGE=alpine:3.18
+ARG BASE_IMAGE=alpine:3.23
 FROM ${BASE_IMAGE}
 ENV GAP_HOME=/opt/gap
 ENV GAP_JUPYTERKERNEL_HOME=${GAP_HOME}/pkg/jupyterkernel
